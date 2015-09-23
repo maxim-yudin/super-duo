@@ -1,2 +1,2 @@
 # super-duo
-The second project for Udacity's Android Nanodegree.
+The second project for Udacity's Android Developer Nanodegree.
