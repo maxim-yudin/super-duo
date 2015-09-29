@@ -25,6 +25,7 @@
                     android:textIsSelectable="true"
                     android:textStyle="bold"
                     android:paddingRight="20dp"
+                    android:paddingEnd="20dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -49,6 +50,8 @@
                     android:textSize="18sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_alignTop="@+id/fullBookCover"
                     android:layout_toRightOf="@+id/fullBookCover"
                     android:layout_toEndOf="@+id/fullBookCover"/>
@@ -60,6 +63,7 @@
                     android:id="@+id/fullBookDesc"
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_below="@+id/fullBookCover"
                     android:layout_margin="10dp"
                     />
@@ -78,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/categories"
                         android:layout_weight="1"
-                        android:gravity="left|top"/>
+                        android:gravity="start|top"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -86,7 +90,7 @@
                         android:id="@+id/authors"
                         android:layout_weight="1"
                         android:textStyle="bold"
-                        android:gravity="right|top"/>
+                        android:gravity="end|top"/>
                 </LinearLayout>
 
                 <ImageButton
@@ -97,7 +101,7 @@
                     android:onClick="goBack"
                     android:src="@drawable/ic_action_undo"
                     style="?android:attr/buttonBarButtonStyle"
-                    android:layout_gravity="right|top"
+                    android:layout_gravity="end|top"
                     android:layout_alignParentTop="true"
                     android:layout_alignRight="@+id/fullBookTitle"
                     android:layout_alignEnd="@+id/fullBookTitle"/>
@@ -111,7 +115,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right">
+            android:layout_gravity="bottom|end">
 
             <Button
                 android:layout_width="wrap_content"
@@ -120,7 +124,9 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/delete_button"
                 android:drawableLeft="@drawable/ic_action_discard"
+                android:drawableStart="@drawable/ic_action_discard"
                 android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"/>
         </LinearLayout>
 
