@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import it.jaschke.alexandria.api.Callback;
@@ -135,6 +136,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public void onItemSelected(String ean) {
+        // hide keyboard when the book detail fragment is opened
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+
         Bundle args = new Bundle();
         args.putString(BookDetail.EAN_KEY, ean);
 
