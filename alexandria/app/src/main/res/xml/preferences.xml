@@ -9,6 +9,7 @@
     <ListPreference
         android:key="pref_startFragment"
         android:title="@string/pref_startScreen"
+        android:defaultValue="0"
         android:entries="@array/pref_start_options"
         android:entryValues="@array/pref_start_values"
         />
