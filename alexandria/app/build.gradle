@@ -37,8 +37,9 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
+    
     // use for barcode lib - https://github.com/journeyapps/zxing-android-embedded
     compile 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
     compile 'com.google.zxing:core:3.2.0'
-    compile 'com.android.support:design:23.0.1'
 }
