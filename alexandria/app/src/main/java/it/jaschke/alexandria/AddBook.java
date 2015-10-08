@@ -1,9 +1,14 @@
 package it.jaschke.alexandria;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -26,6 +31,11 @@ import it.jaschke.alexandria.services.DownloadImage;
 
 
 public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    /**
+     * Id to identify a camera permission request.
+     */
+    private static final int REQUEST_PERMISSION_CAMERA = 0;
+
     private static final String TAG = "INTENT_TO_SCAN_ACTIVITY";
     private EditText ean;
     private final int LOADER_ID = 1;
@@ -89,7 +99,15 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         rootView.findViewById(R.id.scan_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentIntegrator.forSupportFragment(AddBook.this).initiateScan();
+                // Check if the Camera permission is already available.
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    // Camera permission has not been granted.
+                    requestCameraPermission();
+                } else {
+                    // Camera permissions is already available, show the camera preview for scanning barcode.
+                    showCameraPreviewForScanningBarcode();
+                }
             }
         });
 
@@ -117,6 +135,57 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         }
 
         return rootView;
+    }
+
+    /**
+     * Requests the Camera permission.
+     * If the permission has been denied previously, a SnackBar will prompt the user to grant the
+     * permission, otherwise it is requested directly.
+     */
+    private void requestCameraPermission() {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            // For example if the user has previously denied the permission.
+            Snackbar.make(rootView, R.string.permission_camera_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction(android.R.string.ok, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                                    REQUEST_PERMISSION_CAMERA);
+                        }
+                    })
+                    .show();
+        } else {
+            // Camera permission has not been granted yet. Request it directly.
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                    REQUEST_PERMISSION_CAMERA);
+        }
+    }
+
+    /**
+     * Callback received when a permissions request has been completed.
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_PERMISSION_CAMERA) {
+            // Received permission result for camera permission.
+            // Check if the only required permission has been granted
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showCameraPreviewForScanningBarcode();
+            } else {
+                Snackbar.make(rootView, R.string.permission_not_granted,
+                        Snackbar.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    private void showCameraPreviewForScanningBarcode() {
+        IntentIntegrator.forSupportFragment(AddBook.this).initiateScan();
     }
 
     private void restartLoader() {
