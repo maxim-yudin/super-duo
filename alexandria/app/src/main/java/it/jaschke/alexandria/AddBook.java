@@ -1,7 +1,7 @@
 package it.jaschke.alexandria;
 
 import android.Manifest;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -36,17 +36,9 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
      */
     private static final int REQUEST_PERMISSION_CAMERA = 0;
 
-    private static final String TAG = "INTENT_TO_SCAN_ACTIVITY";
     private EditText ean;
-    private final int LOADER_ID = 1;
     private View rootView;
     private final String EAN_CONTENT = "eanContent";
-    private static final String SCAN_FORMAT = "scanFormat";
-    private static final String SCAN_CONTENTS = "scanContents";
-
-    private String mScanFormat = "Format:";
-    private String mScanContents = "Contents:";
-
 
     public AddBook() {
     }
@@ -189,6 +181,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     }
 
     private void restartLoader() {
+        int LOADER_ID = 1;
         getLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
@@ -256,9 +249,9 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        activity.setTitle(R.string.scan);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getActivity().setTitle(R.string.scan);
     }
 
     @Override
