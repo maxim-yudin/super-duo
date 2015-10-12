@@ -178,4 +178,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationDrawerFragment.isDrawerOpen()) {
+            navigationDrawerFragment.closeDrawer();
+            return;
+        }
+        super.onBackPressed();
+    }
 }
