@@ -36,11 +36,18 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
      */
     private static final int REQUEST_PERMISSION_CAMERA = 0;
 
+    private Snackbar snackBar;
     private EditText ean;
     private View rootView;
     private final String EAN_CONTENT = "eanContent";
 
     public AddBook() {
+    }
+
+    public void closeSnackBarIfShown() {
+        if (snackBar != null && snackBar.isShown()) {
+            snackBar.dismiss();
+        }
     }
 
     @Override
@@ -139,16 +146,16 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             // Provide an additional rationale to the user if the permission was not granted
             // and the user would benefit from additional context for the use of the permission.
             // For example if the user has previously denied the permission.
-            Snackbar.make(rootView, R.string.permission_camera_rationale,
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            requestPermissions(new String[]{Manifest.permission.CAMERA},
-                                    REQUEST_PERMISSION_CAMERA);
-                        }
-                    })
-                    .show();
+            snackBar = Snackbar.make(rootView, R.string.permission_camera_rationale,
+                    Snackbar.LENGTH_INDEFINITE);
+            snackBar.setAction(android.R.string.ok, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA},
+                            REQUEST_PERMISSION_CAMERA);
+                }
+            });
+            snackBar.show();
         } else {
             // Camera permission has not been granted yet. Request it directly.
             requestPermissions(new String[]{Manifest.permission.CAMERA},
@@ -168,8 +175,9 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 showCameraPreviewForScanningBarcode();
             } else {
-                Snackbar.make(rootView, R.string.permission_not_granted,
-                        Snackbar.LENGTH_SHORT).show();
+                snackBar = Snackbar.make(rootView, R.string.permission_not_granted,
+                        Snackbar.LENGTH_SHORT);
+                snackBar.show();
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);

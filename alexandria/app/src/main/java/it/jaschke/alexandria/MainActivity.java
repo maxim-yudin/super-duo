@@ -110,7 +110,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             getMenuInflater().inflate(R.menu.main, menu);
             restoreActionBar();
             return true;
+        } else {
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+            if (currentFragment instanceof AddBook) {
+                ((AddBook) currentFragment).closeSnackBarIfShown();
+            }
         }
+
         return super.onCreateOptionsMenu(menu);
     }
 
