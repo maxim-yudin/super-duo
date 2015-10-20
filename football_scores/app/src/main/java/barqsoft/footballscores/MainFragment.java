@@ -17,46 +17,57 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class PagerFragment extends Fragment {
-    private static final int NUM_PAGES = 5;
-    public ViewPager mPagerHandler;
-    private final MainScreenFragment[] viewFragments = new MainScreenFragment[5];
+public class MainFragment extends Fragment {
+    private static final String CURRENT_FRAGMENT = "current_fragment";
+    private static final int DEFAULT_FRAGMENT = 2;
+
+    private static final int NUM_FRAGMENTS = 5;
+
+    private static final int ONE_DAY_IN_MILLIS = 86400000;
+
+    private ViewPager vpScoreDays;
+
+    private final DayScoreFragment[] dayScoreFragments = new DayScoreFragment[5];
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.pager_fragment, container, false);
-        mPagerHandler = (ViewPager) rootView.findViewById(R.id.pager);
-        myPageAdapter mPagerAdapter = new myPageAdapter(getChildFragmentManager());
-        for (int i = 0; i < NUM_PAGES; i++) {
-            Date fragmentdate = new Date(System.currentTimeMillis() + ((i - 2) * 86400000));
-            SimpleDateFormat mformat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            viewFragments[i] = new MainScreenFragment();
-            viewFragments[i].setFragmentDate(mformat.format(fragmentdate));
+        vpScoreDays = (ViewPager) rootView.findViewById(R.id.vpScoreDays);
+        ScoreDaysPagerAdapter scoreDaysPagerAdapter = new ScoreDaysPagerAdapter(getChildFragmentManager());
+        for (int i = 0; i < NUM_FRAGMENTS; i++) {
+            dayScoreFragments[i] = DayScoreFragment.newInstance(System.currentTimeMillis() + ((i - 2) * ONE_DAY_IN_MILLIS));
         }
-        mPagerHandler.setAdapter(mPagerAdapter);
-        mPagerHandler.setCurrentItem(MainActivity.current_fragment);
+        vpScoreDays.setAdapter(scoreDaysPagerAdapter);
+        vpScoreDays.setCurrentItem((savedInstanceState != null) ?
+                savedInstanceState.getInt(CURRENT_FRAGMENT) : DEFAULT_FRAGMENT);
         return rootView;
     }
 
-    private class myPageAdapter extends FragmentStatePagerAdapter {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(CURRENT_FRAGMENT, vpScoreDays.getCurrentItem());
+        super.onSaveInstanceState(outState);
+    }
+
+    private class ScoreDaysPagerAdapter extends FragmentStatePagerAdapter {
         @Override
-        public Fragment getItem(int i) {
-            return viewFragments[i];
+        public DayScoreFragment getItem(int i) {
+            return dayScoreFragments[i];
         }
 
         @Override
         public int getCount() {
-            return NUM_PAGES;
+            return NUM_FRAGMENTS;
         }
 
-        public myPageAdapter(FragmentManager fm) {
+        public ScoreDaysPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         // Returns the page title for the top indicator
         @Override
         public CharSequence getPageTitle(int position) {
-            return getDayName(getActivity(), System.currentTimeMillis() + ((position - 2) * 86400000));
+            return getDayName(getActivity(), getItem(position).getDateInMillis());
         }
 
         public String getDayName(Context context, long dateInMillis) {
