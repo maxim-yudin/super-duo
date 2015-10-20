@@ -10,7 +10,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
     public static int selected_match_id;
     public static int current_fragment = 2;
-    public static String LOG_TAG = "MainActivity";
+    private static final String LOG_TAG = "MainActivity";
     private final String save_tag = "Save Test";
     private PagerFragment my_main;
 
