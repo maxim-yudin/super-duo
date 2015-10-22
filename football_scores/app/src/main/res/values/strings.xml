@@ -33,4 +33,32 @@
     <string name="share_match" translatable="false">%1$s %2$s %3$s #Football_Scores</string>
     <string name="api_key" translatable="false">YOUR_API_KEY</string>
     <string name="dummy_data" translatable="false">{\"timeFrameStart\":\"2015-06-18\",\"timeFrameEnd\":\"2015-06-19\",\"count\":1,\"fixtures\":[{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}},{\"_links\":{\"self\":{\"href\":\"http://api.football-data.org/alpha/fixtures/140514\"},\"soccerseason\":{\"href\":\"http://api.football-data.org/alpha/soccerseasons/357\"},\"homeTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/275\"},\"awayTeam\":{\"href\":\"http://api.football-data.org/alpha/teams/263\"}},\"date\":\"2015-06-19T22:00:00Z\",\"status\":\"FINISHED\",\"matchday\":42,\"homeTeamName\":\"TESTING1\",\"awayTeamName\":\"TESTING2\",\"result\":{\"goalsHomeTeam\":2,\"goalsAwayTeam\":4}}]}</string>
+
+    <string name="league_seria_a">Seria A</string>
+    <string name="league_premier">Premier League</string>
+    <string name="league_uefa">UEFA Champions League</string>
+    <string name="league_primera_division">Primera Division</string>
+    <string name="league_bundesliga">Bundesliga</string>
+    <string name="league_unknown">Not known League Please report</string>
+
+    <string name="match_type_group_stages">Group Stages, Matchday : 6</string>
+    <string name="match_type_first_knockout">First Knockout round</string>
+    <string name="match_type_quarter_final">QuarterFinal</string>
+    <string name="match_type_semi_final">SemiFinal</string>
+    <string name="match_type_final">Final</string>
+    <string name="match_type_unknown">Matchday : %1$s</string>
+
+    <string name="scores_empty"> - </string>
+    <string name="scores">%1$s - %2$s</string>
+
+    <string name="team_arsenal_london_fc">Arsenal London FC</string>
+    <string name="team_manchester_united_fc">Manchester United FC</string>
+    <string name="team_swansea_city">Swansea City</string>
+    <string name="team_leicester_city">Leicester City</string>
+    <string name="team_everton_fc">Everton FC</string>
+    <string name="team_west_ham_united_fc">West Ham United FC</string>
+    <string name="team_tottenham_hotspur_fc">Tottenham Hotspur FC</string>
+    <string name="team_west_bromwich_albion">West Bromwich Albion</string>
+    <string name="team_sunderland_afc">Sunderland AFC</string>
+    <string name="team_stoke_city_fc">Stoke City FC</string>
 </resources>
