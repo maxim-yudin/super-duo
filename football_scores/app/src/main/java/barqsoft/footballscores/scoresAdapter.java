@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ScoresAdapter extends CursorAdapter {
+class ScoresAdapter extends CursorAdapter {
     private static final int COL_HOME = 3;
     private static final int COL_AWAY = 4;
     private static final int COL_HOME_GOALS = 6;
@@ -24,8 +24,8 @@ public class ScoresAdapter extends CursorAdapter {
 
     private int selectedDetailMatchId = 0;
 
-    public ScoresAdapter(Context context, Cursor cursor, int flags) {
-        super(context, cursor, flags);
+    public ScoresAdapter(Context context) {
+        super(context, null, 0);
     }
 
     @Override

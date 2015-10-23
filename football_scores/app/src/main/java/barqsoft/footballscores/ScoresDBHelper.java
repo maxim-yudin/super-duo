@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import barqsoft.footballscores.DatabaseContract.scores_table;
 
-public class ScoresDBHelper extends SQLiteOpenHelper {
+class ScoresDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Scores.db";
     private static final int DATABASE_VERSION = 2;
 

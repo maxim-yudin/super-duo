@@ -2,7 +2,7 @@ package barqsoft.footballscores;
 
 import android.content.Context;
 
-public class Utilities {
+class Utilities {
     private static final int SERIE_A = 357;
     private static final int PREMIER_LEGAUE = 354;
     private static final int CHAMPIONS_LEAGUE = 362;

@@ -3,7 +3,7 @@ package barqsoft.footballscores;
 import android.view.View;
 import android.widget.TextView;
 
-public class ViewHolder {
+class ViewHolder {
     public final TextView home_name;
     public final TextView away_name;
     public final TextView score;

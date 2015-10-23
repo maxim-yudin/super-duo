@@ -61,7 +61,7 @@ public class DayScoreFragment extends Fragment implements LoaderManager.LoaderCa
         updateScores();
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         final ListView score_list = (ListView) rootView.findViewById(R.id.scores_list);
-        mAdapter = new ScoresAdapter(getActivity(), null, 0);
+        mAdapter = new ScoresAdapter(getActivity());
         if (savedInstanceState != null) {
             mAdapter.setSelectedDetailMatchId(savedInstanceState.getInt(SELECTED_DETAIL_MATCH_ID));
         }
