@@ -112,20 +112,11 @@ public class myFetchService extends IntentService {
     }
 
     private void processJSONdata(String JSONdata, Context mContext, boolean isReal) {
-        //JSON data
-        // This set of league codes is for the 2015/2016 season. In fall of 2016, they will need to
-        // be updated. Feel free to use the codes
         final String BUNDESLIGA1 = "394";
         final String BUNDESLIGA2 = "395";
-        final String LIGUE1 = "396";
-        final String LIGUE2 = "397";
         final String PREMIER_LEAGUE = "398";
         final String PRIMERA_DIVISION = "399";
-        final String SEGUNDA_DIVISION = "400";
         final String SERIE_A = "401";
-        final String PRIMERA_LIGA = "402";
-        final String Bundesliga3 = "403";
-        final String EREDIVISIE = "404";
 
 
         final String SEASON_LINK = "http://api.football-data.org/alpha/soccerseasons/";
@@ -143,15 +134,15 @@ public class myFetchService extends IntentService {
         final String MATCH_DAY = "matchday";
 
         //Match data
-        String League = null;
-        String mDate = null;
-        String mTime = null;
-        String Home = null;
-        String Away = null;
-        String Home_goals = null;
-        String Away_goals = null;
-        String match_id = null;
-        String match_day = null;
+        String League;
+        String mDate;
+        String mTime;
+        String Home;
+        String Away;
+        String Home_goals;
+        String Away_goals;
+        String match_id;
+        String match_day;
 
 
         try {
@@ -224,17 +215,12 @@ public class myFetchService extends IntentService {
                     values.add(match_values);
                 }
             }
-            int inserted_data = 0;
             ContentValues[] insert_data = new ContentValues[values.size()];
             values.toArray(insert_data);
-            inserted_data = mContext.getContentResolver().bulkInsert(
-                    DatabaseContract.BASE_CONTENT_URI, insert_data);
-
-            //Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
+            mContext.getContentResolver().bulkInsert(DatabaseContract.BASE_CONTENT_URI, insert_data);
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage());
         }
-
     }
 }
 
