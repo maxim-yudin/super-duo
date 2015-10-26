@@ -35,7 +35,7 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/no_icon"
                     android:gravity="center"
-                    android:text="@string/test_text_left"
+                    tools:text="@string/test_text_left"
                     android:textSize="@dimen/TeamNames"/>
 
                 <LinearLayout
@@ -51,7 +51,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/test_text"
+                        tools:text="@string/test_text"
                         android:textSize="@dimen/Score"/>
 
                     <TextView
@@ -73,7 +73,7 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/no_icon"
                     android:gravity="center"
-                    android:text="@string/test_text_right"
+                    tools:text="@string/test_text_right"
                     android:textSize="@dimen/TeamNames"/>
             </LinearLayout>
 

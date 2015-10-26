@@ -40,15 +40,21 @@ class ScoresAdapter extends CursorAdapter {
     public void bindView(View view, final Context context, Cursor cursor) {
         final ViewHolder mHolder = (ViewHolder) view.getTag();
         final String homeTeamName = cursor.getString(COL_HOME);
+        mHolder.home_name.setContentDescription(homeTeamName);
         mHolder.home_name.setText(homeTeamName);
         mHolder.home_name.setCompoundDrawablesWithIntrinsicBounds(0,
                 Utilities.getTeamCrestByTeamName(context, homeTeamName), 0, 0);
         final String awayTeamName = cursor.getString(COL_AWAY);
+        mHolder.away_name.setContentDescription(awayTeamName);
         mHolder.away_name.setText(awayTeamName);
         mHolder.away_name.setCompoundDrawablesWithIntrinsicBounds(0,
                 Utilities.getTeamCrestByTeamName(context, awayTeamName), 0, 0);
-        mHolder.date.setText(cursor.getString(COL_MATCH_TIME));
-        mHolder.score.setText(Utilities.getScores(context, cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
+        final String date = cursor.getString(COL_MATCH_TIME);
+        mHolder.date.setContentDescription(date);
+        mHolder.date.setText(date);
+        final String score = Utilities.getScores(context, cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS));
+        mHolder.score.setContentDescription(score);
+        mHolder.score.setText(score);
         mHolder.match_id = cursor.getInt(COL_ID);
 
         LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
@@ -58,11 +64,15 @@ class ScoresAdapter extends CursorAdapter {
         if (mHolder.match_id == selectedDetailMatchId) {
             container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));
-            TextView match_day = (TextView) v.findViewById(R.id.matchday_textview);
-            match_day.setText(Utilities.getMatchDay(context, cursor.getInt(COL_MATCH_DAY),
-                    cursor.getInt(COL_LEAGUE)));
-            TextView league = (TextView) v.findViewById(R.id.league_textview);
-            league.setText(Utilities.getLeague(context, cursor.getInt(COL_LEAGUE)));
+            TextView matchday_textview = (TextView) v.findViewById(R.id.matchday_textview);
+            String match = Utilities.getMatchDay(context, cursor.getInt(COL_MATCH_DAY),
+                    cursor.getInt(COL_LEAGUE));
+            matchday_textview.setContentDescription(match);
+            matchday_textview.setText(match);
+            TextView league_textview = (TextView) v.findViewById(R.id.league_textview);
+            String league = Utilities.getLeague(context, cursor.getInt(COL_LEAGUE));
+            league_textview.setContentDescription(league);
+            league_textview.setText(league);
             Button share_button = (Button) v.findViewById(R.id.share_button);
             share_button.setOnClickListener(new View.OnClickListener() {
                 @Override

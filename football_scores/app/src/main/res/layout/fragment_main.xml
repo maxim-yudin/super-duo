@@ -2,8 +2,8 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:layout_marginLeft="@dimen/list_horizonal_matgin"
-             android:layout_marginRight="@dimen/list_horizonal_matgin"
+             android:layout_marginLeft="@dimen/list_horizontal_margin"
+             android:layout_marginRight="@dimen/list_horizontal_margin"
              tools:context=".MainActivity$PlaceholderFragment">
 
     <ListView
