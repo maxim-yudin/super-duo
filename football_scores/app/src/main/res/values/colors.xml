@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="green">#D3E992</color>
+
+    <color name="black54">#8a000000</color>
+    <color name="black87">#de000000</color>
 </resources>

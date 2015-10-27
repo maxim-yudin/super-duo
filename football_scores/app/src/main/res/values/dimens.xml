@@ -11,4 +11,10 @@
     <dimen name="card_margin_horizontal">8dp</dimen>
     <dimen name="card_margin_vertical">4dp</dimen>
     <dimen name="card_content">16dp</dimen>
+
+    <dimen name="view_margin">4dp</dimen>
+
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_width">250dp</dimen>
+    <dimen name="widget_height">110dp</dimen>
 </resources>

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import barqsoft.footballscores.DatabaseContract.scores_table;
+import barqsoft.footballscores.DatabaseContract.ScoresTable;
 
 class ScoresDBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Scores.db";
@@ -17,17 +17,17 @@ class ScoresDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String CreateScoresTable = "CREATE TABLE " + DatabaseContract.SCORES_TABLE + " ("
-                + scores_table._ID + " INTEGER PRIMARY KEY,"
-                + scores_table.DATE_COL + " TEXT NOT NULL,"
-                + scores_table.TIME_COL + " INTEGER NOT NULL,"
-                + scores_table.HOME_COL + " TEXT NOT NULL,"
-                + scores_table.AWAY_COL + " TEXT NOT NULL,"
-                + scores_table.LEAGUE_COL + " INTEGER NOT NULL,"
-                + scores_table.HOME_GOALS_COL + " TEXT NOT NULL,"
-                + scores_table.AWAY_GOALS_COL + " TEXT NOT NULL,"
-                + scores_table.MATCH_ID + " INTEGER NOT NULL,"
-                + scores_table.MATCH_DAY + " INTEGER NOT NULL,"
-                + " UNIQUE (" + scores_table.MATCH_ID + ") ON CONFLICT REPLACE"
+                + ScoresTable._ID + " INTEGER PRIMARY KEY,"
+                + ScoresTable.DATE_COL + " TEXT NOT NULL,"
+                + ScoresTable.TIME_COL + " INTEGER NOT NULL,"
+                + ScoresTable.HOME_COL + " TEXT NOT NULL,"
+                + ScoresTable.AWAY_COL + " TEXT NOT NULL,"
+                + ScoresTable.LEAGUE_COL + " INTEGER NOT NULL,"
+                + ScoresTable.HOME_GOALS_COL + " TEXT NOT NULL,"
+                + ScoresTable.AWAY_GOALS_COL + " TEXT NOT NULL,"
+                + ScoresTable.MATCH_ID + " INTEGER NOT NULL,"
+                + ScoresTable.MATCH_DAY + " INTEGER NOT NULL,"
+                + " UNIQUE (" + ScoresTable.MATCH_ID + ") ON CONFLICT REPLACE"
                 + " );";
         db.execSQL(CreateScoresTable);
     }

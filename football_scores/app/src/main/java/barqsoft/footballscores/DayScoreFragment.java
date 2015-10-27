@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import barqsoft.footballscores.DatabaseContract.ScoresTable;
 import barqsoft.footballscores.service.myFetchService;
 
 public class DayScoreFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -86,7 +87,7 @@ public class DayScoreFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(getActivity(), DatabaseContract.scores_table.buildScoreWithDate(),
+        return new CursorLoader(getActivity(), ScoresTable.buildScoreWithDate(),
                 null, null, new String[]{getDate()}, null);
     }
 
