@@ -12,15 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-class ScoresAdapter extends CursorAdapter {
-    private static final int COL_HOME = 3;
-    private static final int COL_AWAY = 4;
-    private static final int COL_HOME_GOALS = 6;
-    private static final int COL_AWAY_GOALS = 7;
-    private static final int COL_LEAGUE = 5;
-    private static final int COL_MATCH_DAY = 9;
-    private static final int COL_ID = 8;
-    private static final int COL_MATCH_TIME = 2;
+public class ScoresAdapter extends CursorAdapter {
+    public static final int COL_HOME = 3;
+    public static final int COL_AWAY = 4;
+    public static final int COL_HOME_GOALS = 6;
+    public static final int COL_AWAY_GOALS = 7;
+    public static final int COL_LEAGUE = 5;
+    public static final int COL_MATCH_DAY = 9;
+    public static final int COL_ID = 8;
+    public static final int COL_MATCH_TIME = 2;
 
     private int selectedDetailMatchId = 0;
 

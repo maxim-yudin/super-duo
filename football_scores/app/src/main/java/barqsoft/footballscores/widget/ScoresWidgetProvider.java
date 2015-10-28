@@ -24,8 +24,8 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
             final RemoteViews views = new RemoteViews(context.getPackageName(),
                     R.layout.appwidget_scores);
 
-            final Intent intent = new Intent(context, ScoresWidgetService.class)
-                    .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            final Intent intent = new Intent(context, ScoresWidgetService.class);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
             views.setRemoteAdapter(R.id.lvMatchList, intent);
             views.setEmptyView(R.id.lvMatchList, R.id.tvEmpty);

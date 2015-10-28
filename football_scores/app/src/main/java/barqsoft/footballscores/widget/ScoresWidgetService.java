@@ -17,11 +17,9 @@ import java.util.Locale;
 import barqsoft.footballscores.DatabaseContract.ScoresTable;
 import barqsoft.footballscores.Match;
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.ScoresAdapter;
 import barqsoft.footballscores.Utilities;
 
-/**
- * Created by maximyudin on 27.10.15.
- */
 @TargetApi(VERSION_CODES.JELLY_BEAN)
 public class ScoresWidgetService extends RemoteViewsService {
 
@@ -32,9 +30,9 @@ public class ScoresWidgetService extends RemoteViewsService {
 
     private static class ScoresRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-        private List<Match> mWidgetItems = new ArrayList<>();
+        private List<Match> matchList = new ArrayList<>();
 
-        private Context context;
+        private final Context context;
 
         public ScoresRemoteViewsFactory(Context context) {
             this.context = context;
@@ -42,12 +40,31 @@ public class ScoresWidgetService extends RemoteViewsService {
 
         @Override
         public void onCreate() {
-            queryData();
+            Date fragmentDate = new Date(System.currentTimeMillis());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            String matchDate = format.format(fragmentDate);
+
+            Cursor cursor = context.getContentResolver().query(
+                    ScoresTable.buildScoreWithDate(), null, null,
+                    new String[]{matchDate}, null);
+            if (cursor == null || cursor.getCount() < 1) {
+                matchList = new ArrayList<>();
+            } else {
+                while (cursor.moveToNext()) {
+                    String homeName = cursor.getString(ScoresAdapter.COL_HOME);
+                    String awayName = cursor.getString(ScoresAdapter.COL_AWAY);
+                    int homeGoals = cursor.getInt(ScoresAdapter.COL_HOME_GOALS);
+                    int awayGoals = cursor.getInt(ScoresAdapter.COL_AWAY_GOALS);
+                    String time = cursor.getString(ScoresAdapter.COL_MATCH_TIME);
+                    matchList.add(new Match(homeName, awayName, homeGoals, awayGoals, time));
+                }
+                cursor.close();
+            }
         }
 
         @Override
         public void onDestroy() {
-            mWidgetItems.clear();
+            matchList.clear();
         }
 
         @Override
@@ -56,12 +73,12 @@ public class ScoresWidgetService extends RemoteViewsService {
 
         @Override
         public int getCount() {
-            return mWidgetItems.size();
+            return matchList.size();
         }
 
         @Override
         public RemoteViews getViewAt(int position) {
-            Match match = mWidgetItems.get(position);
+            Match match = matchList.get(position);
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.match_item);
 
             views.setTextViewText(R.id.home_name, match.homeTeam);
@@ -74,8 +91,8 @@ public class ScoresWidgetService extends RemoteViewsService {
             views.setTextViewCompoundDrawables(R.id.away_name, 0,
                     Utilities.getTeamCrestByTeamName(context, match.awayTeam), 0, 0);
 
-            views.setTextViewText(R.id.date_textview, match.date);
-            views.setContentDescription(R.id.date_textview, match.date);
+            views.setTextViewText(R.id.time_textview, match.time);
+            views.setContentDescription(R.id.time_textview, match.time);
 
             String score = Utilities.getScores(context, match.homeGoals, match.awayGoals);
             views.setTextViewText(R.id.score_textview, score);
@@ -102,34 +119,6 @@ public class ScoresWidgetService extends RemoteViewsService {
         @Override
         public boolean hasStableIds() {
             return true;
-        }
-
-        private void queryData() {
-            Date fragmentDate = new Date(System.currentTimeMillis());
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            String matchDate = format.format(fragmentDate);
-
-            Cursor cursor = context.getContentResolver().query(
-                    ScoresTable.buildScoreWithDate(), null, null,
-                    new String[]{matchDate}, null);
-            if (null == cursor || cursor.getCount() < 1) {
-                mWidgetItems = new ArrayList<>();
-            } else {
-                final int homeIndex = cursor.getColumnIndex(ScoresTable.HOME_COL);
-                final int awayIndex = cursor.getColumnIndex(ScoresTable.AWAY_COL);
-                final int homeGoalsIndex = cursor.getColumnIndex(ScoresTable.HOME_GOALS_COL);
-                final int awayGoalsIndex = cursor.getColumnIndex(ScoresTable.AWAY_GOALS_COL);
-                final int dateIndex = cursor.getColumnIndex(ScoresTable.DATE_COL);
-                while (cursor.moveToNext()) {
-                    String homeName = cursor.getString(homeIndex);
-                    String awayName = cursor.getString(awayIndex);
-                    int homeGoals = cursor.getInt(homeGoalsIndex);
-                    int awayGoals = cursor.getInt(awayGoalsIndex);
-                    String date = cursor.getString(dateIndex);
-                    mWidgetItems.add(new Match(homeName, awayName, homeGoals, awayGoals, date));
-                }
-                cursor.close();
-            }
         }
     }
 }
