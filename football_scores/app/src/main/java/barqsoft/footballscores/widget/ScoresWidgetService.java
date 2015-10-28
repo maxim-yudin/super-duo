@@ -64,20 +64,20 @@ public class ScoresWidgetService extends RemoteViewsService {
             Match match = mWidgetItems.get(position);
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.match_item);
 
-            views.setTextViewText(R.id.home_name, match.getHomeTeam());
-            views.setContentDescription(R.id.home_name, match.getHomeTeam());
+            views.setTextViewText(R.id.home_name, match.homeTeam);
+            views.setContentDescription(R.id.home_name, match.homeTeam);
             views.setTextViewCompoundDrawables(R.id.home_name, 0,
-                    Utilities.getTeamCrestByTeamName(context, match.getHomeTeam()), 0, 0);
+                    Utilities.getTeamCrestByTeamName(context, match.homeTeam), 0, 0);
 
-            views.setTextViewText(R.id.away_name, match.getAwayTeam());
-            views.setContentDescription(R.id.home_name, match.getAwayTeam());
+            views.setTextViewText(R.id.away_name, match.awayTeam);
+            views.setContentDescription(R.id.home_name, match.awayTeam);
             views.setTextViewCompoundDrawables(R.id.away_name, 0,
-                    Utilities.getTeamCrestByTeamName(context, match.getAwayTeam()), 0, 0);
+                    Utilities.getTeamCrestByTeamName(context, match.awayTeam), 0, 0);
 
-            views.setTextViewText(R.id.date_textview, match.getDate());
-            views.setContentDescription(R.id.date_textview, match.getDate());
+            views.setTextViewText(R.id.date_textview, match.date);
+            views.setContentDescription(R.id.date_textview, match.date);
 
-            String score = Utilities.getScores(context, match.getHomeGoals(), match.getAwayGoals());
+            String score = Utilities.getScores(context, match.homeGoals, match.awayGoals);
             views.setTextViewText(R.id.score_textview, score);
             views.setContentDescription(R.id.score_textview, score);
 
