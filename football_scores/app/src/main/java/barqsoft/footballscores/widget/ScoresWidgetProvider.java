@@ -27,8 +27,8 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
             final Intent intent = new Intent(context, ScoresWidgetService.class)
                     .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-            views.setRemoteAdapter(R.id.widget_list_view, intent);
-            views.setEmptyView(R.id.widget_list_view, R.id.empty_view);
+            views.setRemoteAdapter(R.id.lvMatchList, intent);
+            views.setEmptyView(R.id.lvMatchList, R.id.tvEmpty);
 
             Intent templateIntent = new Intent(context, MainActivity.class);
             templateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -36,13 +36,7 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
             PendingIntent templatePendingIntent = PendingIntent.getBroadcast(context, 0,
                     templateIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setPendingIntentTemplate(R.id.widget_list_view, templatePendingIntent);
-
-            Intent launchIntent = new Intent(context, MainActivity.class);
-            launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
-
-            views.setOnClickPendingIntent(R.id.widget_header, pendingIntent);
+            views.setPendingIntentTemplate(R.id.lvMatchList, templatePendingIntent);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,8 +13,8 @@
         android:layout_weight="1"
         android:drawableTop="@drawable/no_icon"
         android:gravity="center"
-        android:textSize="@dimen/TeamNames"
-        tools:text="@string/test_text_left"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="@string/test_text_left" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -31,7 +30,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/Score"
-            tools:text="@string/test_text"/>
+            tools:text="@string/test_text" />
 
         <TextView
             android:id="@+id/date_textview"
@@ -40,7 +39,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            tools:text="@string/test_text"/>
+            tools:text="@string/test_text" />
 
     </LinearLayout>
 
@@ -52,6 +51,6 @@
         android:layout_weight="1"
         android:drawableTop="@drawable/no_icon"
         android:gravity="center"
-        android:textSize="@dimen/TeamNames"
-        tools:text="@string/test_text_right"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="@string/test_text_right" />
 </LinearLayout>

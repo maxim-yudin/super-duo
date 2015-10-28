@@ -1,64 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white">
-
-    <RelativeLayout
-        android:id="@+id/widget_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:padding="@dimen/view_margin">
-
-        <ImageView
-            android:id="@+id/widget_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/view_margin"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:id="@+id/widget_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/view_margin"
-            android:layout_toEndOf="@id/widget_logo"
-            android:layout_toRightOf="@id/widget_logo"
-            android:contentDescription="@string/app_name"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-        <TextView
-            android:id="@+id/widget_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/widget_title"
-            android:layout_marginTop="@dimen/view_margin"
-            android:layout_toEndOf="@id/widget_logo"
-            android:layout_toRightOf="@id/widget_logo"
-            android:contentDescription="@string/today"
-            android:text="@string/today"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-    </RelativeLayout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <ListView
-        android:id="@+id/widget_list_view"
+        android:id="@+id/lvMatchList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/widget_header"
-        android:orientation="vertical"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/empty_view"
+        android:id="@+id/tvEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/widget_header"
-        android:contentDescription="@string/widget_empty_text"
+        android:contentDescription="@string/no_matches"
         android:gravity="center"
-        android:text="@string/widget_empty_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black54" />
-</RelativeLayout>
+        android:text="@string/no_matches"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+</FrameLayout>
