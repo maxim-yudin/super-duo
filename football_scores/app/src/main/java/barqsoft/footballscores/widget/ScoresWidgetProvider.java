@@ -33,7 +33,7 @@ public class ScoresWidgetProvider extends AppWidgetProvider {
             Intent templateIntent = new Intent(context, MainActivity.class);
             templateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             templateIntent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-            PendingIntent templatePendingIntent = PendingIntent.getBroadcast(context, 0,
+            PendingIntent templatePendingIntent = PendingIntent.getActivity(context, 0,
                     templateIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.lvMatchList, templatePendingIntent);

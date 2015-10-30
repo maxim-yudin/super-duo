@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 import barqsoft.footballscores.DatabaseContract.ScoresTable;
+import barqsoft.footballscores.DayScoreFragment;
 import barqsoft.footballscores.Match;
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.ScoresAdapter;
@@ -51,12 +52,13 @@ public class ScoresWidgetService extends RemoteViewsService {
                 matchList = new ArrayList<>();
             } else {
                 while (cursor.moveToNext()) {
+                    int id = cursor.getInt(ScoresAdapter.COL_ID);
                     String homeName = cursor.getString(ScoresAdapter.COL_HOME);
                     String awayName = cursor.getString(ScoresAdapter.COL_AWAY);
                     int homeGoals = cursor.getInt(ScoresAdapter.COL_HOME_GOALS);
                     int awayGoals = cursor.getInt(ScoresAdapter.COL_AWAY_GOALS);
                     String time = cursor.getString(ScoresAdapter.COL_MATCH_TIME);
-                    matchList.add(new Match(homeName, awayName, homeGoals, awayGoals, time));
+                    matchList.add(new Match(id, homeName, awayName, homeGoals, awayGoals, time));
                 }
                 cursor.close();
             }
@@ -97,6 +99,10 @@ public class ScoresWidgetService extends RemoteViewsService {
             String score = Utilities.getScores(context, match.homeGoals, match.awayGoals);
             views.setTextViewText(R.id.score_textview, score);
             views.setContentDescription(R.id.score_textview, score);
+
+            Intent fillInIntent = new Intent();
+            fillInIntent.putExtra(DayScoreFragment.SELECTED_DETAIL_MATCH_ID, match.id);
+            views.setOnClickFillInIntent(R.id.llMatch, fillInIntent);
 
             return views;
         }
