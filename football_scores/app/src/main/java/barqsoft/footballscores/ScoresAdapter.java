@@ -12,15 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-class ScoresAdapter extends CursorAdapter {
-    private static final int COL_HOME = 3;
-    private static final int COL_AWAY = 4;
-    private static final int COL_HOME_GOALS = 6;
-    private static final int COL_AWAY_GOALS = 7;
-    private static final int COL_LEAGUE = 5;
-    private static final int COL_MATCH_DAY = 9;
-    private static final int COL_ID = 8;
-    private static final int COL_MATCH_TIME = 2;
+public class ScoresAdapter extends CursorAdapter {
+    public static final int COL_HOME = 3;
+    public static final int COL_AWAY = 4;
+    public static final int COL_HOME_GOALS = 6;
+    public static final int COL_AWAY_GOALS = 7;
+    public static final int COL_LEAGUE = 5;
+    public static final int COL_MATCH_DAY = 9;
+    public static final int COL_ID = 8;
+    public static final int COL_MATCH_TIME = 2;
 
     private int selectedDetailMatchId = 0;
 
@@ -78,7 +78,7 @@ class ScoresAdapter extends CursorAdapter {
                 @Override
                 public void onClick(View v) {
                     //add Share Action)
-                    context.startActivity(createShareForecastIntent(context.getString(R.string.share_match,
+                    context.startActivity(createShareMatchIntent(context.getString(R.string.share_match,
                             mHolder.home_name.getText(), mHolder.score.getText(), mHolder.away_name.getText())));
                 }
             });
@@ -87,7 +87,7 @@ class ScoresAdapter extends CursorAdapter {
         }
     }
 
-    private Intent createShareForecastIntent(String shareText) {
+    private Intent createShareMatchIntent(String shareText) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         if (Build.VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);

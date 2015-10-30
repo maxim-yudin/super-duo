@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/llMatch"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/view_margin">
+
+    <TextView
+        android:id="@+id/home_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/no_icon"
+        android:gravity="center"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/default_text_size"
+        android:textStyle="bold"
+        tools:text="@string/test_text_left"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/score_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/Score"
+            tools:text="@string/test_text"/>
+
+        <TextView
+            android:id="@+id/time_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/default_text_size"
+            tools:text="@string/test_text"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/away_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/no_icon"
+        android:gravity="center"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/default_text_size"
+        android:textStyle="bold"
+        tools:text="@string/test_text_right"/>
+</LinearLayout>

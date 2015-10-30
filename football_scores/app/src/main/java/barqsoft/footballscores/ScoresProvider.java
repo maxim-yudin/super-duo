@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import barqsoft.footballscores.DatabaseContract.ScoresTable;
+
 public class ScoresProvider extends ContentProvider {
     private static ScoresDBHelper mOpenHelper;
     private static final int MATCHES = 100;
@@ -16,11 +18,11 @@ public class ScoresProvider extends ContentProvider {
     private static final int MATCHES_WITH_DATE = 103;
     private final UriMatcher muriMatcher = buildUriMatcher();
 
-    private static final String SCORES_BY_LEAGUE = DatabaseContract.scores_table.LEAGUE_COL + " = ?";
+    private static final String SCORES_BY_LEAGUE = ScoresTable.LEAGUE_COL + " = ?";
     private static final String SCORES_BY_DATE =
-            DatabaseContract.scores_table.DATE_COL + " LIKE ?";
+            ScoresTable.DATE_COL + " LIKE ?";
     private static final String SCORES_BY_ID =
-            DatabaseContract.scores_table.MATCH_ID + " = ?";
+            ScoresTable.MATCH_ID + " = ?";
 
 
     private static UriMatcher buildUriMatcher() {
@@ -38,11 +40,11 @@ public class ScoresProvider extends ContentProvider {
         {
             if (link.contentEquals(DatabaseContract.BASE_CONTENT_URI.toString())) {
                 return MATCHES;
-            } else if (link.contentEquals(DatabaseContract.scores_table.buildScoreWithDate().toString())) {
+            } else if (link.contentEquals(ScoresTable.buildScoreWithDate().toString())) {
                 return MATCHES_WITH_DATE;
-            } else if (link.contentEquals(DatabaseContract.scores_table.buildScoreWithId().toString())) {
+            } else if (link.contentEquals(ScoresTable.buildScoreWithId().toString())) {
                 return MATCHES_WITH_ID;
-            } else if (link.contentEquals(DatabaseContract.scores_table.buildScoreWithLeague().toString())) {
+            } else if (link.contentEquals(ScoresTable.buildScoreWithLeague().toString())) {
                 return MATCHES_WITH_LEAGUE;
             }
         }
@@ -65,13 +67,13 @@ public class ScoresProvider extends ContentProvider {
         final int match = muriMatcher.match(uri);
         switch (match) {
             case MATCHES:
-                return DatabaseContract.scores_table.CONTENT_TYPE;
+                return ScoresTable.CONTENT_TYPE;
             case MATCHES_WITH_LEAGUE:
-                return DatabaseContract.scores_table.CONTENT_TYPE;
+                return ScoresTable.CONTENT_TYPE;
             case MATCHES_WITH_ID:
-                return DatabaseContract.scores_table.CONTENT_ITEM_TYPE;
+                return ScoresTable.CONTENT_ITEM_TYPE;
             case MATCHES_WITH_DATE:
-                return DatabaseContract.scores_table.CONTENT_TYPE;
+                return ScoresTable.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri :" + uri);
         }

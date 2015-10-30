@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class MainFragment extends Fragment {
     private static final String CURRENT_FRAGMENT = "current_fragment";
-    private static final int DEFAULT_FRAGMENT = 2;
+    private static final int TODAY_FRAGMENT = 2;
 
     private static final int NUM_FRAGMENTS = 5;
 
@@ -29,17 +29,29 @@ public class MainFragment extends Fragment {
 
     private final DayScoreFragment[] dayScoreFragments = new DayScoreFragment[5];
 
+    public static MainFragment newInstance(int selectedMatchId) {
+        Bundle args = new Bundle();
+        args.putInt(DayScoreFragment.SELECTED_DETAIL_MATCH_ID, selectedMatchId);
+        MainFragment mainFragment = new MainFragment();
+        mainFragment.setArguments(args);
+        return mainFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.pager_fragment, container, false);
         vpScoreDays = (ViewPager) rootView.findViewById(R.id.vpScoreDays);
         ScoreDaysPagerAdapter scoreDaysPagerAdapter = new ScoreDaysPagerAdapter(getChildFragmentManager());
         for (int i = 0; i < NUM_FRAGMENTS; i++) {
-            dayScoreFragments[i] = DayScoreFragment.newInstance(System.currentTimeMillis() + ((i - 2) * ONE_DAY_IN_MILLIS));
+            int selectedMatchId = (savedInstanceState == null && i == TODAY_FRAGMENT) ?
+                    getArguments().getInt(DayScoreFragment.SELECTED_DETAIL_MATCH_ID)
+                    : 0;
+            dayScoreFragments[i] =
+                    DayScoreFragment.newInstance(System.currentTimeMillis() + ((i - 2) * ONE_DAY_IN_MILLIS), selectedMatchId);
         }
         vpScoreDays.setAdapter(scoreDaysPagerAdapter);
         vpScoreDays.setCurrentItem((savedInstanceState != null) ?
-                savedInstanceState.getInt(CURRENT_FRAGMENT) : DEFAULT_FRAGMENT);
+                savedInstanceState.getInt(CURRENT_FRAGMENT) : TODAY_FRAGMENT);
         return rootView;
     }
 

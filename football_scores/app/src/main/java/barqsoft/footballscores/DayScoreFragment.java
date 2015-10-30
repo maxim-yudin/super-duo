@@ -17,10 +17,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import barqsoft.footballscores.DatabaseContract.ScoresTable;
 import barqsoft.footballscores.service.myFetchService;
 
 public class DayScoreFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String SELECTED_DETAIL_MATCH_ID = "selected_detail_match_id";
+    public static final String SELECTED_DETAIL_MATCH_ID = "selected_detail_match_id";
     private static final String DATE_IN_MILLIS = "dateInMillis";
 
     private ScoresAdapter mAdapter;
@@ -28,14 +29,26 @@ public class DayScoreFragment extends Fragment implements LoaderManager.LoaderCa
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
-    public static DayScoreFragment newInstance(long dateInMillis) {
+    private ListView score_list;
+
+    boolean isScrollToSelectedMatch = false;
+
+    public static DayScoreFragment newInstance(long dateInMillis, int selectedMatchId) {
         DayScoreFragment fragment = new DayScoreFragment();
 
         Bundle args = new Bundle();
         args.putLong(DATE_IN_MILLIS, dateInMillis);
+        args.putInt(SELECTED_DETAIL_MATCH_ID, selectedMatchId);
         fragment.setArguments(args);
 
         return fragment;
+    }
+
+    public int getSelectedMatchId() {
+        if (getArguments() != null) {
+            return getArguments().getInt(SELECTED_DETAIL_MATCH_ID);
+        }
+        return 0;
     }
 
     public long getDateInMillis() {
@@ -60,10 +73,16 @@ public class DayScoreFragment extends Fragment implements LoaderManager.LoaderCa
                              final Bundle savedInstanceState) {
         updateScores();
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        final ListView score_list = (ListView) rootView.findViewById(R.id.scores_list);
+        score_list = (ListView) rootView.findViewById(R.id.scores_list);
         mAdapter = new ScoresAdapter(getActivity());
         if (savedInstanceState != null) {
+            isScrollToSelectedMatch = false;
             mAdapter.setSelectedDetailMatchId(savedInstanceState.getInt(SELECTED_DETAIL_MATCH_ID));
+        } else {
+            if (getSelectedMatchId() != 0) {
+                isScrollToSelectedMatch = true;
+                mAdapter.setSelectedDetailMatchId(getSelectedMatchId());
+            }
         }
         score_list.setAdapter(mAdapter);
         getLoaderManager().initLoader(SCORES_LOADER, null, this);
@@ -86,17 +105,27 @@ public class DayScoreFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(getActivity(), DatabaseContract.scores_table.buildScoreWithDate(),
+        return new CursorLoader(getActivity(), ScoresTable.buildScoreWithDate(),
                 null, null, new String[]{getDate()}, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        int currentMatchPosition = 0;
+        int selectedMatchPosition = 0;
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
+            if (cursor.getInt(ScoresAdapter.COL_ID) == mAdapter.getSelectedDetailMatchId()) {
+                selectedMatchPosition = currentMatchPosition;
+            }
             cursor.moveToNext();
+            ++currentMatchPosition;
         }
         mAdapter.swapCursor(cursor);
+        if (isScrollToSelectedMatch && currentMatchPosition != 0) {
+            // scroll to selected match from widget
+            score_list.smoothScrollToPosition(selectedMatchPosition);
+        }
     }
 
     @Override

@@ -4,11 +4,18 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="list_horizontal_margin">2dp</dimen>
     <dimen name="share_button_margin">110dp</dimen>
-    <dimen name="TeamNames">17sp</dimen>
     <dimen name="Score">30sp</dimen>
     <dimen name="League">15sp</dimen>
+    <dimen name="default_text_size">14sp</dimen>
 
     <dimen name="card_margin_horizontal">8dp</dimen>
     <dimen name="card_margin_vertical">4dp</dimen>
     <dimen name="card_content">16dp</dimen>
+
+    <dimen name="detail_top_margin">20dp</dimen>
+    <dimen name="view_margin">8dp</dimen>
+
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_width">250dp</dimen>
+    <dimen name="widget_height">110dp</dimen>
 </resources>

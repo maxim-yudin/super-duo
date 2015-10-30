@@ -12,12 +12,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            int selectedMatchId = 0;
+            if (extras != null) {
+                selectedMatchId = extras.getInt(DayScoreFragment.SELECTED_DETAIL_MATCH_ID);
+            }
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new MainFragment())
+                    .replace(R.id.container,
+                            MainFragment.newInstance(selectedMatchId))
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

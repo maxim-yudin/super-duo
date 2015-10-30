@@ -24,6 +24,7 @@ import java.util.TimeZone;
 import java.util.Vector;
 
 import barqsoft.footballscores.DatabaseContract;
+import barqsoft.footballscores.DatabaseContract.ScoresTable;
 import barqsoft.footballscores.R;
 
 public class myFetchService extends IntentService {
@@ -203,15 +204,15 @@ public class myFetchService extends IntentService {
                     Away_goals = match_data.getJSONObject(RESULT).getString(AWAY_GOALS);
                     match_day = match_data.getString(MATCH_DAY);
                     ContentValues match_values = new ContentValues();
-                    match_values.put(DatabaseContract.scores_table.MATCH_ID, match_id);
-                    match_values.put(DatabaseContract.scores_table.DATE_COL, mDate);
-                    match_values.put(DatabaseContract.scores_table.TIME_COL, mTime);
-                    match_values.put(DatabaseContract.scores_table.HOME_COL, Home);
-                    match_values.put(DatabaseContract.scores_table.AWAY_COL, Away);
-                    match_values.put(DatabaseContract.scores_table.HOME_GOALS_COL, Home_goals);
-                    match_values.put(DatabaseContract.scores_table.AWAY_GOALS_COL, Away_goals);
-                    match_values.put(DatabaseContract.scores_table.LEAGUE_COL, League);
-                    match_values.put(DatabaseContract.scores_table.MATCH_DAY, match_day);
+                    match_values.put(ScoresTable.MATCH_ID, match_id);
+                    match_values.put(ScoresTable.DATE_COL, mDate);
+                    match_values.put(ScoresTable.TIME_COL, mTime);
+                    match_values.put(ScoresTable.HOME_COL, Home);
+                    match_values.put(ScoresTable.AWAY_COL, Away);
+                    match_values.put(ScoresTable.HOME_GOALS_COL, Home_goals);
+                    match_values.put(ScoresTable.AWAY_GOALS_COL, Away_goals);
+                    match_values.put(ScoresTable.LEAGUE_COL, League);
+                    match_values.put(ScoresTable.MATCH_DAY, match_day);
                     values.add(match_values);
                 }
             }
